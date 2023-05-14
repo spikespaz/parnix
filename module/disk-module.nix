@@ -1,5 +1,7 @@
 { config, lib, pkgs, ... }:
-let inherit (lib.parnix) mkHookOption mkScriptOption;
+let
+  inherit (lib.parnix) mkHookOption mkScriptOption;
+  inherit (lib.parnix.types) partModule;
 in {
   options = {
     device = lib.mkOption {
@@ -11,7 +13,7 @@ in {
       readOnly = true;
     };
     partitions = lib.mkOption {
-      type = lib.types.listOf lib.types.unspecified;
+      type = lib.types.listOf partModule;
       description = lib.mdDoc ""; # TODO
     };
     alignment = lib.mkOption {
