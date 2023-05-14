@@ -70,5 +70,11 @@ in {
   config = {
     name = baseNameOf config.device;
     requiredPackages = config.requiredPackages ++ [ pkgs.gptfdisk ];
+
+    createScript = pkgs.writeShellScript "createScript-${config.name}" "";
+    formatScript = pkgs.writeShellScript "formatScript-${config.name}" "";
+    mountScript = pkgs.writeShellScript "mountScript-${config.name}" "";
+    unmountScript = pkgs.writeShellScript "unmountScript-${config.name}" "";
+
   };
 }

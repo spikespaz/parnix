@@ -91,5 +91,27 @@ in {
       '';
     };
   };
-  config = { };
+  config = lib.mkMerge [
+    (lib.mkIf (config.format == "efi") {
+      typecode = lib.mkDefault "ef00"; # EFI system partition
+    })
+    (lib.mkIf (config.format == "vfat") {
+      typecode = lib.mkDefault "0700"; # Microsoft basic data
+    })
+    (lib.mkIf (config.format == "ntfs") {
+      typecode = lib.mkDefault "0700"; # Microsoft basic data
+    })
+    (lib.mkIf (config.format == "swap") {
+      typecode = lib.mkDefault "8200"; # Linux swap
+    })
+    (lib.mkIf (config.format == "ext2") {
+      typecode = lib.mkDefault "8300"; # Linux filesystem
+    })
+    (lib.mkIf (config.format == "ext3") {
+      typecode = lib.mkDefault "8300"; # Linux filesystem
+    })
+    (lib.mkIf (config.format == "ext4") {
+      typecode = lib.mkDefault "8300"; # Linux filesystem
+    })
+  ];
 }
