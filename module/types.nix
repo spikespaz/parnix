@@ -1,6 +1,20 @@
 specialArgs@{ lib, pkgs, ... }:
 let
-  sgdiskOffset = lib.types.strMatching "^([+-])([0-9]+)([KMGTP])$";
+  sgdiskOffset = (lib.types.strMatching "^([+-]|)([0-9]+)([KMGTP])$") // {
+    description = lib.mdDoc ''
+      An numerical offset for formatting with `sgdisk` commands,
+      in base-2 units (kibibytes, not kilobytes).
+
+      The unit will be designated by a suffix of one of: `KMGTP`.
+
+      The offset may be prefixed with one of:
+        - `+` (plus) - Offset from the start of the disk.
+        - `-` (minus) - Offset from the end of the disk.
+        - *Nothing* - Offset from the end of the previous partition.
+
+      Pattern: `^([+-]|)([0-9]+)([KMGTP])$`
+    '';
+  };
   sgdiskSize = lib.types.strMatching "^([0-9]+)([KMGTP])$";
   sgdiskTypecode = lib.types.strMatching "^([a-f0-9]{4})$";
 
