@@ -1,7 +1,7 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, parnixTypes, ... }:
 let
   inherit (lib.parnix) mkHookOption mkScriptOption;
-  inherit (lib.parnix.types) partModule;
+  inherit (parnixTypes) partModule;
 in {
   options = {
     device = lib.mkOption {

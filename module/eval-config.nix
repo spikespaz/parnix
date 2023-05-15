@@ -19,21 +19,13 @@ specialArgs ? { }
   #
 }:
 let
-  lib = specialArgs.lib or pkgs.lib or nixpkgs.lib;
-  parnixLib = lib.extend (import ./lib.nix);
+  lib = (specialArgs.lib or pkgs.lib or nixpkgs.lib).extend (import ./lib.nix);
 
   evaluated = lib.evalModules {
     modules = [ config ./. ] ++ extraModules;
     specialArgs = {
-      inherit pkgs;
-      lib = parnixLib.extend (final: prev: {
-        parnix = prev.parnix // {
-          types = import ./types.nix {
-            inherit pkgs;
-            lib = final;
-          };
-        };
-      });
+      inherit pkgs lib;
+      parnixTypes = import ./types.nix { inherit pkgs lib; };
     } // specialArgs;
   };
 in { inherit (evaluated) options config; }

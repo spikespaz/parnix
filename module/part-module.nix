@@ -1,5 +1,5 @@
-{ config, lib, pkgs, ... }:
-let inherit (lib.parnix.types) sgdiskOffset sgdiskSize sgdiskTypecode;
+{ config, lib, pkgs, parnixTypes, ... }:
+let inherit (parnixTypes) sgdiskOffset sgdiskSize sgdiskTypecode;
 in {
   options = {
     format = lib.mkOption {
