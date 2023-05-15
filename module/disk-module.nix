@@ -41,21 +41,21 @@ in {
       '';
     };
 
-    hooks.preCreate = mkHookOption "preCreate";
-    createScript = mkScriptOption "createScript";
-    hooks.postCreate = mkHookOption "postCreate";
+    # hooks.preCreate = mkHookOption "preCreate";
+    # createScript = mkScriptOption "createScript";
+    # hooks.postCreate = mkHookOption "postCreate";
 
-    hooks.preFormat = mkHookOption "preFormat";
-    formatScript = mkScriptOption "formatScript";
-    hooks.postFormat = mkHookOption "postFormat";
+    # hooks.preFormat = mkHookOption "preFormat";
+    # formatScript = mkScriptOption "formatScript";
+    # hooks.postFormat = mkHookOption "postFormat";
 
-    hooks.preMount = mkHookOption "preMount";
-    mountScript = mkScriptOption "mountScript";
-    hooks.postMount = mkHookOption "postMount";
+    # hooks.preMount = mkHookOption "preMount";
+    # mountScript = mkScriptOption "mountScript";
+    # hooks.postMount = mkHookOption "postMount";
 
-    hooks.preUnmount = mkHookOption "preUnmount";
-    unmountScript = mkScriptOption "unmountScript";
-    hooks.postUnmount = mkHookOption "postUnmount";
+    # hooks.preUnmount = mkHookOption "preUnmount";
+    # unmountScript = mkScriptOption "unmountScript";
+    # hooks.postUnmount = mkHookOption "postUnmount";
 
     requiredPackages = lib.mkOption {
       type = with lib.types; listOf package;
@@ -69,12 +69,13 @@ in {
   };
   config = {
     name = baseNameOf config.device;
-    requiredPackages = config.requiredPackages ++ [ pkgs.gptfdisk ];
+    # THIS IS THE SIMPLEST LINE WHICH CAUSES THE INFREC
+    # requiredPackages = config.requiredPackages ++ [ pkgs.gptfdisk ];
 
-    createScript = pkgs.writeShellScript "createScript-${config.name}" "";
-    formatScript = pkgs.writeShellScript "formatScript-${config.name}" "";
-    mountScript = pkgs.writeShellScript "mountScript-${config.name}" "";
-    unmountScript = pkgs.writeShellScript "unmountScript-${config.name}" "";
+    # createScript = pkgs.writeShellScript "createScript-${config.name}" "";
+    # formatScript = pkgs.writeShellScript "formatScript-${config.name}" "";
+    # mountScript = pkgs.writeShellScript "mountScript-${config.name}" "";
+    # unmountScript = pkgs.writeShellScript "unmountScript-${config.name}" "";
 
   };
 }
