@@ -20,12 +20,12 @@ let
     sgdiskTypecode = lib.types.strMatching "^([a-f0-9]{4})$";
 
     _parnixSubmodule = module: setup:
-      lib.types.submoduleWith {
+      lib.types.submoduleWith (setup // {
         modules = [ module ];
         specialArgs = {
           parnixTypes = self;
         } // specialArgs // setup.specialArgs or { };
-      } // setup;
+      });
 
     diskModule = _parnixSubmodule ./disk-module.nix {
       description = lib.mdDoc ''
