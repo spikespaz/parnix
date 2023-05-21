@@ -9,7 +9,7 @@ pkgs ? nixpkgs.legacyPackages.${system},
 # Note that this is required, however a default is provided
 # so that the `extraModules` list may be used instead,
 # as a convenience.
-config ? ({ ... }: { }),
+config ? null,
 # Extra modules to evaluate.
 extraModules ? [ ],
 # Special argument to pass to modules.
@@ -22,7 +22,7 @@ let
   lib = (specialArgs.lib or pkgs.lib or nixpkgs.lib).extend (import ./lib.nix);
 
   evaluated = lib.evalModules {
-    modules = [ config ./. ] ++ extraModules;
+    modules = [ ./. ] ++ lib.optional (config != null) config ++ extraModules;
     specialArgs = {
       inherit pkgs lib;
       parnixTypes = import ./types.nix { inherit pkgs lib; };
