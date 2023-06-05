@@ -7,12 +7,12 @@
       # In your flake, create `partitionConfigurations` outputs by calling
       # `inputs.parnix.lib.partitionConfiguration`, and specify arguments defined
       # by `./module/eval-config.nix`.
-      lib.partitionConfiguration = import ./module/eval-config.nix;
+      lib.parnixConfiguration = import ./module/eval-config.nix;
       nixosModules.parnix = import ./module.nix;
 
       # A very simple example configuration
       # for a standard system with an SSD.
-      partitionConfigurations.simple-ssd = self.lib.partitionConfiguration {
+      parnixConfigurations.simple-ssd = self.lib.parnixConfiguration {
         inherit nixpkgs;
         # Because `pkgs` needs instantiation and this configuration
         # is specific to a host, specify the system this config
